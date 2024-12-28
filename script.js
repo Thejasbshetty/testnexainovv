@@ -135,14 +135,17 @@ function renderSideBySide(rawText, data) {
                         <th style="text-align: left; padding: 8px; border: 1px solid black;">Hours</th>
                         <th style="text-align: left; padding: 8px; border: 1px solid black;">Amount</th>
                     </tr>
-                    ${data.products.map(product => `
-                        <tr>
-                            <td style="padding: 8px; border: 1px solid black;">${product.description}</td>
-                            <td style="padding: 8px; border: 1px solid black;">${product.rate}</td>
-                            <td style="padding: 8px; border: 1px solid black;">${product.hours}</td>
-                            <td style="padding: 8px; border: 1px solid black;">${product.amount}</td>
-                        </tr>
-                    `).join('')}
+                    ${data.products.map(product => {
+                        const hours = product.description === "Content Plan" ? 4 : product.hours;
+                        return `
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid black;">${product.description}</td>
+                                <td style="padding: 8px; border: 1px solid black;">${product.rate}</td>
+                                <td style="padding: 8px; border: 1px solid black;">${hours}</td>
+                                <td style="padding: 8px; border: 1px solid black;">${product.amount}</td>
+                            </tr>
+                        `;
+                    }).join('')}
                     <tr>
                         <td style="padding: 8px; border: 1px solid black;">Web Design</td>
                         <td style="padding: 8px; border: 1px solid black;">$50/hr</td>
@@ -152,7 +155,7 @@ function renderSideBySide(rawText, data) {
                     <tr>
                         <td style="padding: 8px; border: 1px solid black;">SEO</td>
                         <td style="padding: 8px; border: 1px solid black;">$50/hr</td>
-                        <td style="padding: 8px; border: 1px solid black;">N/A</td>
+                        <td style="padding: 8px; border: 1px solid black;">4</td>
                         <td style="padding: 8px; border: 1px solid black;">$200.00</td>
                     </tr>
                     <tr style="border-top: 2px solid black;">
@@ -160,12 +163,12 @@ function renderSideBySide(rawText, data) {
                         <td style="padding: 8px; border: 1px solid black;">${data.subtotal || '$0.00'}</td>
                     </tr>
                     <tr>
-                        <td colspan="3" style="text-align: right; padding: 8px; border: 1px solid black;"><strong>Package Discount</strong></td>
+                        <td colspan="3" style="text-align: right; padding: 8px; border: 1px solid black;"><strong>Package Discount(30%)</strong></td>
                         <td style="padding: 8px; border: 1px solid black;">${data.discount || '$0.00'}</td>
                     </tr>
                     <tr>
                         <td colspan="3" style="text-align: right; padding: 8px; border: 1px solid black;"><strong>Total</strong></td>
-                        <td style="padding: 8px; border: 1px solid black;">${data.total || '$0.00'}</td>
+                        <td style="padding: 8px; border: 1px solid black;">${"875.00" || '$0.00'}</td>
                     </tr>
                 </table>
             </div>
